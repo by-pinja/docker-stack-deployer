@@ -74,7 +74,17 @@ async function deployStack (stack) {
   await dockerLogin()
 
   // 4. Decrypt possible crypted secrets
-  await runCommand(['git-crypt', 'unlock'], cmdOptions)
+  let crypted = true
+
+  try {
+    await runCommand(['stat', '.git/git-crypt'], cmdOptions)
+  } catch (e) {
+    crypted = false
+  } finally {
+    if (crypted) {
+      await runCommand(['git-crypt', 'unlock'], cmdOptions)
+    }
+  }
 
   // 5. Run stack's deployment command
   await runCommand(stackConfig.command.split(' '), cmdOptions)
