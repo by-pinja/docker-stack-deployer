@@ -1,0 +1,12 @@
+{
+  "name": "@protacon/docker-stack-deployer",
+  "version": "0.0.1",
+  "description": "Utility to deploy docker stacks automatically to swarm",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["docker", "stack", "deploy"],
+  "author": "Atte Tarvainen <atte.tarvainen@protacon.com>"
+}

@@ -1,0 +1,34 @@
+version: '3.5'
+
+services:
+  app:
+    build:
+      context: .
+    restart: always
+    command: npm start
+    volumes:
+      - ./:/app
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      # Comment for usage in swarm mode
+      - ./secrets:/run/secrets
+    ports:
+      - 3000:3000
+    environment:
+      DOCKER_USERNAME: _json_key
+      DOCKER_REGISTRY: eu.gcr.io
+    # Uncomment for swarm mode
+    #secrets:
+    #  - dsd-docker-password
+    #  - dsd-ssh-private-key
+    #  - dsd-gpg-private-key
+
+# Uncomment for swarm mode
+#secrets:
+#  dsd-docker-password:
+#    external: true
+#  dsd-ssh-private-key:
+#    external: true
+#  dsd-gpg-private-key:
+#    external: true
