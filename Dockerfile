@@ -7,7 +7,6 @@ RUN apt-get update && apt-get install -y \
   git-crypt \
   apt-transport-https \
   ca-certificates \
-  curl \
   gnupg-agent \
   software-properties-common
 
