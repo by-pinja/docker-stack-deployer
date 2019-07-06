@@ -85,7 +85,7 @@ async function deployStack (stack) {
   let crypted = true
 
   try {
-    await runCommand(['stat', '.git/git-crypt'], cmdOptions)
+    await runCommand(['stat', '.git-crypt'], cmdOptions)
   } catch (e) {
     crypted = false
   } finally {
