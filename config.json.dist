@@ -3,7 +3,8 @@
   "stacks": {
     "barfoo-testicles": {
       "repository": "git@github.com:/protacon/barfoo-testicles",
-      "command": "docker stack deploy -c docker-compose.yml"
+      "branch": "master",
+      "command": "docker stack deploy -c docker-compose.yml",
     }
   }
 }

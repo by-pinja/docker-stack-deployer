@@ -32,6 +32,7 @@ App reads it's configuration at startup from `config.json`
   "stacks": {
     "hello-world": {
       "repository": "git@github.com:/protacon/barfoo-testicles",
+      "branch": "master",
       "command": "docker stack deploy -c docker-compose.yml barfoo-testicles --with-registry-auth"
     }
   }
@@ -49,6 +50,10 @@ Collection of **stack** configurations. Key represents the stack name.
 #### stack.repository (string)
 
 The `deployment repository` of this stack. Configuration is cloned and/or pulled from this specified repository on every deployment.
+
+#### stack.branch (string)
+
+Branch of the used `deployment repository`. Defaults to `master`.
 
 #### stack.command (string)
 
