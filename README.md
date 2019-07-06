@@ -6,7 +6,7 @@ This is a docker stack deployer
 
 ### Secrets
 
-App requires storing the credentials as [Docker secrets](https://docs.docker.com/v17.12/engine/swarm/secrets)
+In swarm mode app requires storing the credentials as [Docker secrets](https://docs.docker.com/v17.12/engine/swarm/secrets)
 
 Secrets can be for example created as external secrets beforehand and use them
 
@@ -16,10 +16,12 @@ cat your-ssh-private-key.txt | docker secret create dsd-ssh-private-key -
 cat your-gpg-private-key.txt | docker secret create dsd-gpg-private-key -
 ```
 
-### Deploy to swarm
+When run with `docker-compose` the secrets part may be "faked" using just pure volume mount.
+
+### Usage with docker-compose
 
 ```
-docker stack deploy -c docker-compose.yml docker-stack-deployer
+docker-compose up -d
 ```
 
 ## Configuration
