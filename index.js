@@ -4,7 +4,8 @@ const path = require('path')
 const fs = require('fs')
 const { spawn } = require('child_process')
 
-const config = require('./config.json')
+const readConfig = () => require('./config.json')
+
 const port = process.env.PORT || 3000
 
 const deploConfigDir = path.join(__dirname, 'deployments')
@@ -12,6 +13,8 @@ const deploConfigDir = path.join(__dirname, 'deployments')
 !fs.existsSync(deploConfigDir) && fs.mkdirSync(deploConfigDir)
 
 const handler = async (request, response) => {
+  const config = readConfig()
+
   response.status = (status) => {
     response.writeHead(status)
     response.end()
@@ -49,6 +52,8 @@ const handler = async (request, response) => {
 async function deployStack (stack) {
   // 1. Check if stack configuration defined
   console.log(`Deploying stack ${stack}`)
+
+  const config = readConfig()
 
   let stackConfig
 
