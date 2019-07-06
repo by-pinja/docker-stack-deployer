@@ -4,7 +4,7 @@ const path = require('path')
 const fs = require('fs')
 const { spawn } = require('child_process')
 
-const readConfig = () => require('./config.json')
+const readConfig = () => JSON.parse(fs.readFileSync('./config.json'))
 
 const port = process.env.PORT || 3000
 
