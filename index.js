@@ -61,10 +61,10 @@ async function deployStack (stack) {
     throw new Error(`No configuration found for stack ${stack}`)
   }
 
-  const { repository, branch } = stackConfig
+  const branch = stackConfig.branch || 'master'
 
   // 2. Update stack configuration from git
-  const stackConfigDir = path.join(deploConfigDir, stack, `-${branch}`)
+  const stackConfigDir = path.join(deploConfigDir, `${stack}-${branch}`)
 
   !fs.existsSync(stackConfigDir) && fs.mkdirSync(stackConfigDir)
 
@@ -74,7 +74,8 @@ async function deployStack (stack) {
     await runCommand(['stat', '.git'], cmdOptions)
     await runCommand(['git', 'pull'], cmdOptions)
   } catch (e) {
-    await runCommand(['git', 'clone', repository, `-b ${branch || 'master'}`, '.'], cmdOptions)
+    const { repository } = stackConfig
+    await runCommand(['git', 'clone', repository, `-b ${branch}`, '.'], cmdOptions)
   }
 
   // 3. Run docker login
