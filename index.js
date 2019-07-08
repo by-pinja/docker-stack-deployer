@@ -64,7 +64,7 @@ async function deployStack (stack) {
   const branch = stackConfig.branch || 'master'
 
   // 2. Update stack configuration from git
-  const stackConfigDir = path.join(deploConfigDir, `${stack}-${branch}`)
+  const stackConfigDir = path.join(deploConfigDir, (`${stack}-${branch}`).replace(/\//g, '_'))
 
   !fs.existsSync(stackConfigDir) && fs.mkdirSync(stackConfigDir)
 
