@@ -1,4 +1,4 @@
-library "jenkins-ptcs-library@0.6.0"
+library 'jenkins-ptcs-library@0.6.1'
 
 def label = "docker-stack-deployer-${UUID.randomUUID().toString()}"
 
