@@ -3,6 +3,7 @@ const url = require('url')
 const path = require('path')
 const fs = require('fs')
 const { spawn } = require('child_process')
+const logger = require('./src/util/logger')
 
 const readConfig = () => JSON.parse(fs.readFileSync('./config.json'))
 
@@ -45,13 +46,13 @@ const handler = async (request, response) => {
   try {
     await deployStack(stack)
   } catch (e) {
-    console.error(`Failed to deploy stack ${stack}: ${e.toString()}`)
+    logger.error(`Failed to deploy stack ${stack}: ${e.toString()}`)
   }
 }
 
 async function deployStack (stack) {
   // 1. Check if stack configuration defined
-  console.log(`Deploying stack ${stack}`)
+  logger.info(`Deploying stack ${stack}`)
 
   const config = readConfig()
 
@@ -97,7 +98,7 @@ async function deployStack (stack) {
   // 5. Run stack's deployment command
   await runCommand(stackConfig.command.split(' '), cmdOptions)
 
-  console.log(`Stack ${stack} deployed`)
+  logger.info(`Stack ${stack} deployed`)
 }
 
 async function dockerLogin () {
@@ -124,8 +125,8 @@ async function runCommand (args, options) {
   return new Promise((resolve, reject) => {
     const proc = spawn(args.shift(), args, {...options, shell: true})
 
-    proc.stdout.on('data', (data) => console.log(data.toString()))
-    proc.stderr.on('data', (data) => console.log(data.toString()))
+    proc.stdout.on('data', (data) => logger.info(data.toString()))
+    proc.stderr.on('data', (data) => logger.info(data.toString()))
 
     proc.on('close', (code) => {
       if (code !== 0) {
@@ -139,4 +140,4 @@ async function runCommand (args, options) {
 
 const server = http.createServer(handler)
 
-server.listen(port, () => console.log(`Listening on ${port}`))
+server.listen(port, () => logger.info(`Listening on ${port}`))
