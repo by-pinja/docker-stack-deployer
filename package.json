@@ -5,8 +5,19 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "standard"
   },
-  "keywords": ["docker", "stack", "deploy"],
-  "author": "Atte Tarvainen <atte.tarvainen@protacon.com>"
+  "keywords": [
+    "docker",
+    "stack",
+    "deploy"
+  ],
+  "author": "Atte Tarvainen <atte.tarvainen@protacon.com>",
+  "dependencies": {
+    "winston": "3.2.1"
+  },
+  "devDependencies": {
+    "standard": "^14.3.1"
+  }
 }
