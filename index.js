@@ -2,7 +2,7 @@ const http = require('http')
 const url = require('url')
 const path = require('path')
 const fs = require('fs')
-const { spawn } = require('child_process')
+const { spawn } = require('child_process')
 const logger = require('./src/util/logger')
 
 const readConfig = () => JSON.parse(fs.readFileSync('./config.json'))
@@ -21,8 +21,8 @@ const handler = async (request, response) => {
     response.end()
   }
 
-  const { path } = url.parse(request.url)
-  const { authorization } = request.headers
+  const { authorization } = request.headers
+  const { pathname } = url.parse(request.url) // eslint-disable-line
 
   if (request.method !== 'POST') {
     return response.status(405)
@@ -32,13 +32,13 @@ const handler = async (request, response) => {
     return response.status(401)
   }
 
-  let regex = /^\/deploy\/(?<stack>[a-z0-9-]+)$/
+  const regex = /^\/deploy\/(?<stack>[a-z0-9-]+)$/
 
-  if (!path.match(regex)) {
+  if (!pathname.match(regex)) {
     return response.status(404)
   }
 
-  const { stack } = path.match(regex).groups
+  const { stack } = path.match(regex).groups
 
   // Request OK, send response
   response.end()
@@ -69,7 +69,7 @@ async function deployStack (stack) {
 
   !fs.existsSync(stackConfigDir) && fs.mkdirSync(stackConfigDir)
 
-  const cmdOptions = { cwd: stackConfigDir }
+  const cmdOptions = { cwd: stackConfigDir }
 
   try {
     await runCommand(['stat', '.git'], cmdOptions)
@@ -102,7 +102,7 @@ async function deployStack (stack) {
 }
 
 async function dockerLogin () {
-  const { 
+  const {
     DOCKER_USERNAME,
     DOCKER_PASSWORD,
     DOCKER_REGISTRY
@@ -123,7 +123,7 @@ async function dockerLogin () {
 
 async function runCommand (args, options) {
   return new Promise((resolve, reject) => {
-    const proc = spawn(args.shift(), args, {...options, shell: true})
+    const proc = spawn(args.shift(), args, { ...options, shell: true })
 
     proc.stdout.on('data', (data) => logger.info(data.toString()))
     proc.stderr.on('data', (data) => logger.info(data.toString()))
