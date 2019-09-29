@@ -4,8 +4,8 @@ const path = require('path')
 const fs = require('fs')
 const { spawn } = require('child_process')
 const logger = require('./src/util/logger')
-
-const readConfig = () => JSON.parse(fs.readFileSync('./config.json'))
+const slackSend = require('./src/util/slackSend')
+const readConfig = require('./src/util/readConfig')
 
 const port = process.env.PORT || 3000
 
@@ -45,8 +45,18 @@ const handler = async (request, response) => {
 
   try {
     await deployStack(stack)
+
+    slackSend({
+      title: `Stack "${stack}" deployed`,
+      color: 'good'
+    })
   } catch (e) {
     logger.error(`Failed to deploy stack ${stack}: ${e.toString()}`)
+    slackSend({
+      title: `Failed to deploy stack "${stack}"`,
+      color: 'danger',
+      footer: e.toString()
+    })
   }
 }
 
