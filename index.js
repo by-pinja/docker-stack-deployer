@@ -38,7 +38,7 @@ const handler = async (request, response) => {
     return response.status(404)
   }
 
-  const { stack } = path.match(regex).groups
+  const { stack } = pathname.match(regex).groups
 
   // Request OK, send response
   response.end()
