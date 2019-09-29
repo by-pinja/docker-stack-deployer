@@ -5,8 +5,7 @@ const fs = require('fs')
 const { spawn } = require('child_process')
 const logger = require('./src/util/logger')
 const slackSend = require('./src/util/slackSend')
-
-const readConfig = () => JSON.parse(fs.readFileSync('./config.json'))
+const readConfig = require('./src/util/readConfig')
 
 const port = process.env.PORT || 3000
 

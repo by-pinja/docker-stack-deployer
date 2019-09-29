@@ -1,11 +1,12 @@
 const { IncomingWebhook } = require('@slack/webhook')
+const readConfig = require('./readConfig')
 
-const url = process.env.SLACK_WEBHOOK_URL
+const { slackWebhookUrl } = readConfig()
 
 let slackSend = () => {}
 
-if (url) {
-  const webhook = new IncomingWebhook(url)
+if (slackWebhookUrl) {
+  const webhook = new IncomingWebhook(slackWebhookUrl)
 
   slackSend = (opts) => {
     webhook.send({
