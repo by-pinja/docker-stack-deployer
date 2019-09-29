@@ -1,5 +1,7 @@
 # What is this?
 
+[![Build Status](https://jenkins.protacon.cloud/buildStatus/icon?job=www.github.com/docker-stack-deployer/master)](https://jenkins.protacon.cloud/job/www.github.com/job/docker-stack-deployer/job/master/)
+
 This is a docker stack deployer
 
 ## Installation
