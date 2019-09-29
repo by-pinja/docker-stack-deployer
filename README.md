@@ -52,7 +52,7 @@ Required token to authorize requests to this tool. For example "foobar" token is
 
 Slack Incoming Webhook url to send notifications to. Notifications are send from both successfull and failed deployments.
 
-### stacks (sting => stack)
+### stacks (string => stack)
 
 Collection of **stack** configurations. Key represents the stack name.
 
