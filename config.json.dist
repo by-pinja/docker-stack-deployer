@@ -1,5 +1,6 @@
 {
   "token": "foobar",
+  "envName": "Dev",
   "slackWebhookUrl": "https://hooks.slack.com/services/YOURSLACKWEBHOOKTOKEN",
   "stacks": {
     "barfoo-testicles": {

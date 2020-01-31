@@ -33,7 +33,8 @@ App reads it's configuration at startup from `config.json`
 ```
 {
   "token": "foobar",
-  "slackWebhookUrl": "https://hooks.slack.com/services/YOURSLACKWEBHOOKTOKEN"
+  "envName": "Production",
+  "slackWebhookUrl": "https://hooks.slack.com/services/YOURSLACKWEBHOOKTOKEN",
   "stacks": {
     "hello-world": {
       "repository": "git@github.com:/protacon/barfoo-testicles",

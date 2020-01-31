@@ -43,17 +43,22 @@ const handler = async (request, response) => {
   // Request OK, send response
   response.end()
 
+  const envName = config.envName ? `[${config.envName}]` : ''
+  const startTime = new Date()
+
   try {
     await deployStack(stack)
 
+    const duration = ((new Date() - startTime) / 1000).toFixed(2) + 's'
+
     slackSend({
-      title: `Stack "${stack}" deployed`,
+      title: `${envName} Stack "${stack}" deployed (${duration})`,
       color: 'good'
     })
   } catch (e) {
     logger.error(`Failed to deploy stack ${stack}: ${e.toString()}`)
     slackSend({
-      title: `Failed to deploy stack "${stack}"`,
+      title: `${envName} Failed to deploy stack "${stack}"`,
       color: 'danger',
       footer: e.toString()
     })
