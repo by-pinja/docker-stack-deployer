@@ -1,12 +1,12 @@
 {
   "token": "foobar",
-  "envName": "Dev",
+  "envName": "Production",
   "slackWebhookUrl": "https://hooks.slack.com/services/YOURSLACKWEBHOOKTOKEN",
   "stacks": {
-    "barfoo-testicles": {
-      "repository": "git@github.com:/protacon/barfoo-testicles",
+    "hello-world": {
+      "repository": "git@github.com:/yourdomain/yourdeploymentrepository",
       "branch": "master",
-      "command": "docker stack deploy -c docker-compose.yml",
+      "command": "docker stack deploy -c docker-compose.yml hello-world"
     }
   }
 }
