@@ -14,7 +14,7 @@ podTemplate(label: label,
     )
   ]
 ) {
-  def project = "docker-stack-deployer"
+  def project = 'docker-stack-deployer'
 
   node(label) {
     stage('Checkout') {
@@ -37,6 +37,7 @@ podTemplate(label: label,
     stage('Package') {
       container('docker') {
         publishContainerToGcr(project);
+        publishTagToDockerhub(project);
       }
     }
   }

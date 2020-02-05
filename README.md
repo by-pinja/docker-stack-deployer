@@ -1,8 +1,10 @@
 # What is this?
 
+[![Docker pulls](https://img.shields.io/docker/pulls/ptcos/docker-stack-deployer.svg)](https://hub.docker.com/r/ptcos/docker-stack-deployer/)
 [![Build Status](https://jenkins.protacon.cloud/buildStatus/icon?job=www.github.com/docker-stack-deployer/master)](https://jenkins.protacon.cloud/job/www.github.com/job/docker-stack-deployer/job/master/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is a docker stack deployer
+Simple utility meant to ease the deployment in self hosted Docker environments.
 
 ## Installation
 
@@ -37,9 +39,9 @@ App reads it's configuration at startup from `config.json`
   "slackWebhookUrl": "https://hooks.slack.com/services/YOURSLACKWEBHOOKTOKEN",
   "stacks": {
     "hello-world": {
-      "repository": "git@github.com:/protacon/barfoo-testicles",
+      "repository": "git@github.com:/yourdomain/yourdeploymentrepository",
       "branch": "master",
-      "command": "docker stack deploy -c docker-compose.yml barfoo-testicles --with-registry-auth"
+      "command": "docker stack deploy -c docker-compose.yml hello-world"
     }
   }
 }
@@ -68,3 +70,15 @@ Branch of the used `deployment repository`. Defaults to `master`.
 #### stack.command (string)
 
 The actual deployment command. Usually just `docker stack deploy -c docker-compose.yml [stack-name]`.
+
+## Usage
+
+Just call the `/deploy/:stack` endpoint with the `stack` name you want to deploy
+
+```
+curl -XPOST --header "Authorization: Token yourowntoken" http://localhost:3000/deploy/hello-world
+```
+
+## License
+
+[The MIT License (MIT)](LICENSE)
