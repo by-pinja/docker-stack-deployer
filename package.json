@@ -15,10 +15,10 @@
   ],
   "author": "Atte Tarvainen <atte.tarvainen@protacon.com>",
   "dependencies": {
-    "@slack/webhook": "5.0.2",
-    "winston": "3.2.1"
+    "@slack/webhook": "5.0.3",
+    "winston": "3.3.3"
   },
   "devDependencies": {
-    "standard": "^14.3.1"
+    "standard": "^14.3.4"
   }
 }
